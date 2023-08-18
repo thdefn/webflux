@@ -1,55 +1,61 @@
-package project.blocking;
+package project.future;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import project.blocking.UserBlockingService;
 import project.blocking.repository.ArticleRepository;
 import project.blocking.repository.FollowRepository;
 import project.blocking.repository.ImageRepository;
 import project.blocking.repository.UserRepository;
 import project.common.User;
+import project.future.repository.ArticleFutureRepository;
+import project.future.repository.FollowFutureRepository;
+import project.future.repository.ImageFutureRepository;
+import project.future.repository.UserFutureRepository;
 
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserBlockingServiceTest {
-    UserBlockingService userBlockingService;
-    UserRepository userRepository;
-    ArticleRepository articleRepository;
-    ImageRepository imageRepository;
-    FollowRepository followRepository;
+class UserFutureServiceTest {
+    UserFutureService userFutureService;
+    UserFutureRepository userRepository;
+    ArticleFutureRepository articleRepository;
+    ImageFutureRepository imageRepository;
+    FollowFutureRepository followRepository;
 
     @BeforeEach
     void setUp() {
-        userRepository = new UserRepository();
-        articleRepository = new ArticleRepository();
-        imageRepository = new ImageRepository();
-        followRepository = new FollowRepository();
+        userRepository = new UserFutureRepository();
+        articleRepository = new ArticleFutureRepository();
+        imageRepository = new ImageFutureRepository();
+        followRepository = new FollowFutureRepository();
 
-        userBlockingService = new UserBlockingService(
+        userFutureService = new UserFutureService(
                 userRepository, articleRepository, imageRepository, followRepository
         );
     }
 
     @Test
-    void getUserEmptyIfInvalidUserIdIsGiven() {
+    void getUserEmptyIfInvalidUserIdIsGiven() throws ExecutionException, InterruptedException {
         // given
         String userId = "invalid_user_id";
 
         // when
-        Optional<User> user = userBlockingService.getUserById(userId);
+        Optional<User> user = userFutureService.getUserById(userId).get();
 
         // then
         assertTrue(user.isEmpty());
     }
 
     @Test
-    void testGetUser() {
+    void testGetUser() throws ExecutionException, InterruptedException {
         // given
         String userId = "1234";
 
         // when
-        Optional<User> optionalUser = userBlockingService.getUserById(userId);
+        Optional<User> optionalUser = userFutureService.getUserById(userId).get();
 
         // then
         assertFalse(optionalUser.isEmpty());

@@ -1,11 +1,11 @@
 package project.blocking;
 
 
-import lombok.RequiredArgsConstructor;
 import project.blocking.repository.ArticleRepository;
 import project.blocking.repository.FollowRepository;
 import project.blocking.repository.ImageRepository;
 import project.blocking.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import project.common.Article;
 import project.common.Image;
 import project.common.User;
