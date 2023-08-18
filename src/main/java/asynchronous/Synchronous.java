@@ -1,10 +1,12 @@
+package asynchronous;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Caller 는 Callee 의 결과에 관심이 있다.
  */
 @Slf4j
-public class A {
+public class Synchronous {
     public static void main(String[] args) {
         log.info("Start main");
         var result = getResult();

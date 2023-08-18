@@ -1,3 +1,5 @@
+package completablefuture.completionstage;
+
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

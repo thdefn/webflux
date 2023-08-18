@@ -1,3 +1,5 @@
+package asynchronous;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Callable;
@@ -10,7 +12,7 @@ import java.util.concurrent.Future;
  * Caller 는 Callee 의 결과에 관심이 있다.
  */
 @Slf4j
-public class C {
+public class NonBlockingSynchronous {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         log.info("Start main");
         Future<Integer> result = getResult();

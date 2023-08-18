@@ -1,3 +1,5 @@
+package asynchronous;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Consumer;
@@ -6,7 +8,7 @@ import java.util.function.Consumer;
  * Caller 는 Callee 의 결과에 관심이 없다.
  */
 @Slf4j
-public class B {
+public class Asynchronous {
     public static void main(String[] args) {
         log.info("Start main");
         getResult(new Consumer<Integer>() {
