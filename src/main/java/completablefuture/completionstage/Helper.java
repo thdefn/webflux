@@ -70,4 +70,16 @@ public class Helper {
             return "result: " + value;
         });
     }
+
+    public static CompletableFuture<Integer> waitAndReturn(int millis, int value) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                log.info("waitAndReturn: {}ms", millis);
+                Thread.sleep(millis);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            return value;
+        });
+    }
 }
