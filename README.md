@@ -172,3 +172,26 @@ public static void main(String[] args) throws InterruptedException {
 java.lang.ArithmeticException: / by zero in exceptionally
 55:36 [ForkJoinPool.commonPool-worker-5] - 0 in thenAcceptAsync
 ```
+
+### Reactive Programming
+- 비동기 데이터 stream을 사용하는 패러다임
+- event-driven
+  - 모든 것이 이벤트로 구성되고 이벤트를 통해서 전파되어야 한다.
+  - 데이터의 전달, 에러, 완료까지 모두 이벤트로 취급
+  - event-driven 은 message-driven 에 속한다.
+- Reactive Manifesto 의 Responsive, Resilient, Elastic, Message Driven 까지 모두 해당
+#### Reactive Manifesto
+> - 구성 요소는 서로 비동기적으로 메시지를 주고 받으며, 독립적인 실행을 보장한다.
+> - 메시지 큐를 생성하고 배압을 적용하여 부하를 관리하고 흐름을 제어한다.
+
+#### Reactive Stream
+- `Callee`는 `Caller`에게 응답이 아닌 `Publisher`를 전달한다.
+  - `Publisher`는 메세지 큐를 생성해서 부하를 관리하고 흐름을 제어한다.
+  
+    ➡️ **back-pressure**를 조절할 수 있는 수단
+- `Callee`는 각각의 값을 `Publisher`를 통해서 전달한다.
+- `Caller`는 해당 `Publisher`를 `Subscribe` 하거나 다른 `Caller`에게 전달한다.
+- `Caller`는 `Subscriber`를 등록하여 back-pressure 를 조절하여 처리 가능한 만큼만 전달받는다.
+  - `Callee`는 `Publisher`를 반환하고 `Caller`는 `Subscriber`를 등록한다.
+  
+    ➡️ `Callee`와 `Caller`는 **비동기적으로 동작**
