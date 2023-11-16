@@ -174,7 +174,7 @@ java.lang.ArithmeticException: / by zero in exceptionally
 ```
 
 ### Reactive Programming
-- 비동기 데이터 stream을 사용하는 패러다임
+- 비동기 데이터 stream 을 사용하는 패러다임
 - event-driven
   - 모든 것이 이벤트로 구성되고 이벤트를 통해서 전파되어야 한다.
   - 데이터의 전달, 에러, 완료까지 모두 이벤트로 취급
@@ -203,8 +203,9 @@ java.lang.ArithmeticException: / by zero in exceptionally
     - `Publisher`가 생성해서 `Subscriber`에 전달한다.
     - 일종의 `Subscriber` 가 쓸 수 있는 리모콘 ex) 데이터 더 줘, 데이터 그만 줘
     - `back-pressure`를 조절할 수 있는 request 함수
-  <br/>
-  <img width="744" alt="스크린샷 2023-11-16 오후 2 26 58" src="https://github.com/thdefn/webflux/assets/80521474/97b5dc0c-4339-45d6-a418-2ef9ca2d864e">
+<br/>
+<br/>
+<img width="744" alt="스크린샷 2023-11-16 오후 2 26 58" src="https://github.com/thdefn/webflux/assets/80521474/97b5dc0c-4339-45d6-a418-2ef9ca2d864e">
 
 
 #### Publisher
