@@ -13,10 +13,10 @@ import java.util.concurrent.Flow;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FixedIntPublisher implements Flow.Publisher<FixedIntPublisher.Result>{
+public class FixedIntPublisher implements Flow.Publisher<FixedIntPublisher.Result> {
 
     @Data
-    public static class Result{
+    public static class Result {
         private final Integer value;
         private final Integer requestCount;
     }
@@ -24,15 +24,18 @@ public class FixedIntPublisher implements Flow.Publisher<FixedIntPublisher.Resul
     @Override
     public void subscribe(Flow.Subscriber<? super Result> subscriber) {
         var numbers = Collections.synchronizedList(
-                new ArrayList<>(List.of(1,2,3,4,5,6,7))
+                new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7))
         );
         Iterator<Integer> iterator = numbers.iterator();
         var subscription = new IntSubscription(subscriber, iterator);
         subscriber.onSubscribe(subscription);
     }
 
+    /**
+     * 리모콘
+     */
     @RequiredArgsConstructor
-    private static class IntSubscription implements Flow.Subscription{
+    private static class IntSubscription implements Flow.Subscription {
         private final Flow.Subscriber<? super Result> subscriber;
         private final Iterator<Integer> numbers;
         private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -41,15 +44,15 @@ public class FixedIntPublisher implements Flow.Publisher<FixedIntPublisher.Resul
 
         @Override
         public void request(long n) {
-            executor.submit(()-> {
+            executor.submit(() -> {
                 for (int i = 0; i < n; i++) {
-                    if(numbers.hasNext()){
+                    if (numbers.hasNext()) {
                         int number = numbers.next();
                         numbers.remove();
                         subscriber.onNext(new Result(number, count.get()));
-                    }else {
-                        var isChanged =isCompleted.compareAndSet(false, true);
-                        if(isChanged) {
+                    } else {
+                        var isChanged = isCompleted.compareAndSet(false, true);
+                        if (isChanged) {
                             executor.shutdown();
                             subscriber.onComplete();
                             isCompleted.set(true);

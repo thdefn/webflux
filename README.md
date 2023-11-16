@@ -205,3 +205,11 @@ java.lang.ArithmeticException: / by zero in exceptionally
     - `back-pressure`를 조절할 수 있는 request 함수
   <br/>
   <img width="744" alt="스크린샷 2023-11-16 오후 2 26 58" src="https://github.com/thdefn/webflux/assets/80521474/97b5dc0c-4339-45d6-a418-2ef9ca2d864e">
+
+
+#### Publisher
+|                     Hot Publisher                      |           Cold Publisher            |
+|:------------------------------------------------------:|:-----------------------------------:|
+| `subscriber`가 없더라도 데이터를 생성하고 스트림에 `push`하는 `publisher` | `subscribe`가 시작되는 순간부터 데이터를 생성하고 전송 |
+|              여러 `subscriber`에게 동일한 데이터 전달              |  `subscriber`에 따라 독립적인 데이터 스트림 제공   |
+|                트위터 게시글 읽기, 공유 리소스 변화 등                 |          파일 읽기, 웹 API 요청 등          |

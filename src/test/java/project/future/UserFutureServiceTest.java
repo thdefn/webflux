@@ -2,11 +2,6 @@ package project.future;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import project.blocking.UserBlockingService;
-import project.blocking.repository.ArticleRepository;
-import project.blocking.repository.FollowRepository;
-import project.blocking.repository.ImageRepository;
-import project.blocking.repository.UserRepository;
 import project.common.User;
 import project.future.repository.ArticleFutureRepository;
 import project.future.repository.FollowFutureRepository;
