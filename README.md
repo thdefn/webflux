@@ -197,8 +197,11 @@ java.lang.ArithmeticException: / by zero in exceptionally
     ➡️ `Callee`와 `Caller`는 **비동기적으로 동작**
 - 구조
   - 데이터 혹은 이벤트를 제공하는 `Publisher`
+    - `onSubscribe` `onNext` `onComplete` `onError` 채널을 통해 `Publisher`가 `Subscriber`에게 이벤트를 전달한다.
   - 데이터 혹은 이벤트를 제공받는 `Subscriber`
   - 데이터 흐름을 조절하는 `Subscription`
     - `Publisher`가 생성해서 `Subscriber`에 전달한다.
     - 일종의 `Subscriber` 가 쓸 수 있는 리모콘 ex) 데이터 더 줘, 데이터 그만 줘
     - `back-pressure`를 조절할 수 있는 request 함수
+  <br/>
+  <img width="744" alt="스크린샷 2023-11-16 오후 2 26 58" src="https://github.com/thdefn/webflux/assets/80521474/97b5dc0c-4339-45d6-a418-2ef9ca2d864e">
