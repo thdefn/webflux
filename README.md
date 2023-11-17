@@ -214,3 +214,18 @@ java.lang.ArithmeticException: / by zero in exceptionally
 | `subscriber`가 없더라도 데이터를 생성하고 스트림에 `push`하는 `publisher` | `subscribe`가 시작되는 순간부터 데이터를 생성하고 전송 |
 |              여러 `subscriber`에게 동일한 데이터 전달              |  `subscriber`에 따라 독립적인 데이터 스트림 제공   |
 |                트위터 게시글 읽기, 공유 리소스 변화 등                 |          파일 읽기, 웹 API 요청 등          |
+
+#### Reactive Streams 구현 라이브러리
+- **Project Reactor**
+  - `Flux`
+    - O-n개의 item 전달 ≒ `List<T>`
+    - 에러가 발생하면 error 시그널 전달 후 종료
+    - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
+    - back-pressure 지원
+  - `Mono`
+    - O or 1개의 item 전달 ≒ `Optional<T>`
+      - 1개의 item 만 전달하기 때문에 next 하나만 실행하면 complete 가 보장됨
+      - 혹은 전달하지 않고 complete 하면 값이 없다는 것을 의미
+      - 하나의 값이 있거나 없다
+    - 에러가 발생하면 error 시그널 전달 후 종료
+    - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
