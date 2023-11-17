@@ -264,3 +264,15 @@ java.lang.ArithmeticException: / by zero in exceptionally
 <br/>
 <img width="751" alt="스크린샷 2023-11-17 오후 6 32 56" src="https://github.com/thdefn/webflux/assets/80521474/c42d59ff-84cb-4960-8df0-fed4c8f6705d">
 
+#### Mutiny
+- `Multi`
+    - 0-n개의 item 전달
+    - 에러가 발생하면 error 시그널 전달 후 종료
+    - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
+    - back-pressure 지원
+    - `Flux`와 유사
+- `Uni`
+    - 0-1개의 item 전달
+    - 에러가 발생하면 error 시그널 전달 후 종료
+    - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
+    - `Mono`와 유사
