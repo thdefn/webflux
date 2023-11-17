@@ -261,4 +261,6 @@ java.lang.ArithmeticException: / by zero in exceptionally
   - `Completable`
     - onComplete 혹은 onError signal 전달
     - 값이 아닌 사건을 전달
+<br/>
+<img width="751" alt="스크린샷 2023-11-17 오후 6 32 56" src="https://github.com/thdefn/webflux/assets/80521474/c42d59ff-84cb-4960-8df0-fed4c8f6705d">
 
