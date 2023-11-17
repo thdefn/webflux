@@ -1,18 +1,18 @@
-package reactivestreamsimpl.projectreactor;
+package reactivestreamsimpl;
 
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 @Slf4j
-@RequiredArgsConstructor
-public class SimpleSubscriber<T> implements Subscriber<T> {
-    private final Integer count;
+public class ContinuousRequestSubscriber<T> implements Subscriber<T> {
+    private final Integer count = 1;
+    private Subscription subscription = null;
 
     @Override
     public void onSubscribe(Subscription s) {
+        this.subscription = s;
         log.info("subscribe");
         s.request(count);
         log.info("request: {}", count);
@@ -22,7 +22,10 @@ public class SimpleSubscriber<T> implements Subscriber<T> {
     @Override
     public void onNext(T t) {
         log.info("item: {}", t);
-        Thread.sleep(100);
+
+        Thread.sleep(1000);
+        subscription.request(1);
+        log.info("request: {}", count);
     }
 
     @Override

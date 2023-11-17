@@ -1,16 +1,16 @@
 package reactivestreamsimpl.projectreactor.flux;
 
 import lombok.extern.slf4j.Slf4j;
-import reactivestreamsimpl.projectreactor.SimpleSubscriber;
+import reactivestreamsimpl.SimpleSubscriber;
 import reactor.core.publisher.Flux;
 
 /**
  * Flux 는 아무 값도 넘기지 않은 상황에서 complete 할 수 있다.
  *
  * [main] INFO reactivestreamsimpl.projectreactor.flux.FluxCompleteExample - start main
- * [main] INFO reactivestreamsimpl.projectreactor.SimpleSubscriber - subscribe
- * [main] INFO reactivestreamsimpl.projectreactor.SimpleSubscriber - request: 2147483647
- * [main] INFO reactivestreamsimpl.projectreactor.SimpleSubscriber - complete
+ * [main] INFO reactivestreamsimpl.SimpleSubscriber - subscribe
+ * [main] INFO reactivestreamsimpl.SimpleSubscriber - request: 2147483647
+ * [main] INFO reactivestreamsimpl.SimpleSubscriber - complete
  * [main] INFO reactivestreamsimpl.projectreactor.flux.FluxCompleteExample - end main
  */
 @Slf4j

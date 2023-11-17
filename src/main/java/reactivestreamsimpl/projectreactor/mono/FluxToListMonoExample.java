@@ -1,9 +1,8 @@
 package reactivestreamsimpl.projectreactor.mono;
 
 import lombok.extern.slf4j.Slf4j;
-import reactivestreamsimpl.projectreactor.SimpleSubscriber;
+import reactivestreamsimpl.SimpleSubscriber;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -13,10 +12,10 @@ import java.util.List;
  * onComplete 가 내려오는 순간 가지고 있는 배열을 onNext 로 아래에다 전달함
  *
  * [main] INFO reactivestreamsimpl.projectreactor.mono.FluxToMonoExample - start main
- * [main] INFO reactivestreamsimpl.projectreactor.SimpleSubscriber - subscribe
- * [main] INFO reactivestreamsimpl.projectreactor.SimpleSubscriber - request: 2147483647
- * [main] INFO reactivestreamsimpl.projectreactor.SimpleSubscriber - item: 1
- * [main] INFO reactivestreamsimpl.projectreactor.SimpleSubscriber - complete
+ * [main] INFO reactivestreamsimpl.SimpleSubscriber - subscribe
+ * [main] INFO reactivestreamsimpl.SimpleSubscriber - request: 2147483647
+ * [main] INFO reactivestreamsimpl.SimpleSubscriber - item: 1
+ * [main] INFO reactivestreamsimpl.SimpleSubscriber - complete
  * [main] INFO reactivestreamsimpl.projectreactor.mono.FluxToMonoExample - end main
  */
 @Slf4j

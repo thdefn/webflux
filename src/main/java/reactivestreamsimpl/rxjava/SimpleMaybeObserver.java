@@ -1,0 +1,32 @@
+package reactivestreamsimpl.rxjava;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.MaybeObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class SimpleMaybeObserver<T> implements MaybeObserver<T> {
+    private Disposable disposable;
+    @Override
+    public void onSubscribe(@NonNull Disposable d) {
+        this.disposable = d;
+        log.info("subscribe");
+    }
+
+    @Override
+    public void onSuccess(@NonNull T t) {
+        log.info("item : {}", t);
+    }
+
+    @Override
+    public void onError(@NonNull Throwable e) {
+        log.error("error: {}", e.getMessage());
+    }
+
+    // onSuccess 를 타지 않고 onComplete 로 오는 케이스 커버하기 위함
+    @Override
+    public void onComplete() {
+        log.info("complete");
+    }
+}

@@ -1,7 +1,7 @@
 package reactivestreamsimpl.projectreactor.flux;
 
 import lombok.extern.slf4j.Slf4j;
-import reactivestreamsimpl.projectreactor.SimpleSubscriber;
+import reactivestreamsimpl.SimpleSubscriber;
 import reactor.core.publisher.Flux;
 
 import java.util.List;

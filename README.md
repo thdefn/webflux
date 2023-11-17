@@ -215,17 +215,50 @@ java.lang.ArithmeticException: / by zero in exceptionally
 |              여러 `subscriber`에게 동일한 데이터 전달              |  `subscriber`에 따라 독립적인 데이터 스트림 제공   |
 |                트위터 게시글 읽기, 공유 리소스 변화 등                 |          파일 읽기, 웹 API 요청 등          |
 
-#### Reactive Streams 구현 라이브러리
-- **Project Reactor**
+### Reactive Streams 구현 라이브러리
+#### **Project Reactor**
   - `Flux`
-    - O-n개의 item 전달 ≒ `List<T>`
+    - 0-n개의 item 전달 ≒ `List<T>`
     - 에러가 발생하면 error 시그널 전달 후 종료
     - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
     - back-pressure 지원
   - `Mono`
-    - O or 1개의 item 전달 ≒ `Optional<T>`
+    - 0 or 1개의 item 전달 ≒ `Optional<T>`
       - 1개의 item 만 전달하기 때문에 next 하나만 실행하면 complete 가 보장됨
       - 혹은 전달하지 않고 complete 하면 값이 없다는 것을 의미
       - 하나의 값이 있거나 없다
     - 에러가 발생하면 error 시그널 전달 후 종료
     - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
+#### **RxJava**
+
+|   `Observable`    |   `Flowable` |
+|:---------------:|:----------:|
+| Push 기반 | Pull 기반 |
+|  Subscriber 가 처리할 수 없더라도 item 을 전달 |  Subscriber 가 request 수를 조절    |
+|               Reactive manifesto 의 message driven 을 일부만 준수              |         Reactive manifesto 의 message driven 을 준수         |
+|             onSubscribe 로 Disposable 전달           |         onSubscribe 시 Subscription 전달      |
+
+  - `Flowable`
+    - 0-n개의 item 전달 
+    - 에러가 발생하면 error 시그널 전달 후 종료
+    - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
+    - back-pressure 지원
+    - `Flux`와 유사
+  - `Observable`
+    - 0-n개의 item 전달 
+    - 에러가 발생하면 error 시그널 전달 후 종료
+    - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
+    - back-pressure 지원 x
+  - `Single`
+    - 1개의 item 을 전달 후 바로 onComplete signal 전달
+    - 1개의 item 이 없다면 onError signal 전달
+    - 에러가 발생했다면 onError signal 전달
+  - `Maybe`
+    - 1개의 item 을 전달 후 바로 onComplete signal 전달
+    - 1개의 item 이 없어도 onComplete signal 전달 가능
+    - 에러가 발생했다면 onError signal 전달
+    - `Mono`와 유사
+  - `Completable`
+    - onComplete 혹은 onError signal 전달
+    - 값이 아닌 사건을 전달
+
