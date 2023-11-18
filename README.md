@@ -300,7 +300,11 @@ java.lang.ArithmeticException: / by zero in exceptionally
   1. 동기 blocking 으로 동작
      - application 이 `read()` 를 호출하면 커널이 응답을 돌려줄 때까지 아무것도 할 수 없음
      - I/O 요청이 발생할 때마다 스레드를 새로 할당하면, 스레드를 생성 및 관리하는 비용과 컨텍스트 스위칭으로 인한 cpu 자원 소모
-  2. Java IO 에서 커널 버퍼에 직접 접근 불가
+     </br>
+     <img width="360" alt="스크린샷 2023-11-18 오후 8 35 59" src="https://github.com/thdefn/webflux/assets/80521474/b632396c-6004-492b-ac33-55eed5c2e6f3">
+  3. Java IO 에서 커널 버퍼에 직접 접근 불가
      - 하드웨어에서 값을 읽어오면 disk controller 가 DMA 를 통해 커널 버퍼에 값을 복사
      - 커널 버퍼에서 jvm 버퍼로 복사하는 과정에서 cpu 자원 소모
      - jvm 버퍼에 있기 때문에 gc의 대상이 되고 이또한 cpu 자원 소모
+     </br>
+     <img width="545" alt="스크린샷 2023-11-18 오후 8 32 05" src="https://github.com/thdefn/webflux/assets/80521474/68d1c0b3-04f1-494a-b6f0-754c37d1ed8e">
