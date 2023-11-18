@@ -276,3 +276,31 @@ java.lang.ArithmeticException: / by zero in exceptionally
     - 에러가 발생하면 error 시그널 전달 후 종료
     - 모든 item 을 전달했다면 complete 시그널 전달 후 종료
     - `Mono`와 유사
+
+
+### JAVA IO, NIO, AIO
+#### 함수 호출 모델
+|              |                동기                |                비동기                 |
+|:------------:|:--------------------------------:|:----------------------------------:|
+|   **Blocking**   |  Java IO  |   x  |
+| **Non-blocking** | Java NIO (File IO는 Non-blocking 불가능) | Java AIO |
+
+
+#### I/O 모델
+|              |     동기     | 비동기 |
+|:------------:|:----------:|:---:|
+|   **Blocking**   |  Java IO   |  x  |
+| **Non-blocking** | Java NIO, Java AIO |  x  |
+
+#### Java IO
+- 파일과 네트워크에 데이터를 읽고 쓸 수 있는 API 제공
+- byte 단위로 읽고 쓸 수 있는 stream ex) `InputStream` `OutputStream`
+- blocking 단위로 동작
+- 문제점
+  1. 동기 blocking 으로 동작
+     - application 이 `read()` 를 호출하면 커널이 응답을 돌려줄 때까지 아무것도 할 수 없음
+     - I/O 요청이 발생할 때마다 스레드를 새로 할당하면, 스레드를 생성 및 관리하는 비용과 컨텍스트 스위칭으로 인한 cpu 자원 소모
+  2. Java IO 에서 커널 버퍼에 직접 접근 불가
+     - 하드웨어에서 값을 읽어오면 disk controller 가 DMA 를 통해 커널 버퍼에 값을 복사
+     - 커널 버퍼에서 jvm 버퍼로 복사하는 과정에서 cpu 자원 소모
+     - jvm 버퍼에 있기 때문에 gc의 대상이 되고 이또한 cpu 자원 소모
