@@ -308,3 +308,34 @@ java.lang.ArithmeticException: / by zero in exceptionally
      - jvm 버퍼에 있기 때문에 gc의 대상이 되고 이또한 cpu 자원 소모
      </br>
      <img width="545" alt="스크린샷 2023-11-18 오후 8 32 05" src="https://github.com/thdefn/webflux/assets/80521474/68d1c0b3-04f1-494a-b6f0-754c37d1ed8e">
+
+
+
+#### Java NIO
+- 파일과 네트워크에 데이터를 읽고 쓸 수 있는 API 제공
+- buffer 기반
+  1. `DirectByteBuffer`
+     - native 메모리에 저장
+     - 커널 메모리에서 복사하지 않으므로 데이터를 읽고 쓰는 속도 빠름
+     - 비용이 많이 드는 시스템콜을 사용하므로 allocate, deallocate 가 느림
+  2. `HeapByteBuffer`
+     - JVM heap 메모리에 저장. byte array를 랩핑
+     - 커널 메모리에서 복사가 일어나므로 데이터를 읽고 쓰는 속도 느림 ➡️ 임시로 DirectBuffer 를 만들기 때문에 성능 저하
+     - gc 에서 관리가 되므로 allocate, deallocate 가 빠름
+- non-blocking 지원 
+  - `SelectableChannel.configureBlocking`
+    - 서버가 `accept()` 하면서 클라이언트의 접속을 기다리고, 클라이언트가 `connect()` 하면서 서버의 허용을 기다리는 것이 blocking 지점
+    - `ServerSocketChannel` 의 `accept()`, `SocketChannel` 의 `connect()` 등이 non-blocking 으로 동작
+- selector, channel 도입으로 높은 성능 보장
+
+|                 |    Java NIO     |          Java IO          |
+|:---------------:|:---------------:|:-------------------------:|
+|   **데이터의 흐름**   |  양방향            |        단방향                |
+|     **종류**      |     Channel     | InputStream, OutputStream |
+|   **데이터의 단위**   |     buffer      |     byte 혹은 character     |
+| **blocking 여부** | non-blocking 지원 |       blocking 만 가능       |
+|    **특이 사항**    |   Selector 지원   |             x             |
+
+
+
+
